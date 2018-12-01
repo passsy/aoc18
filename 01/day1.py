@@ -1,5 +1,6 @@
 #! /usr/bin/python
 import unittest
+import itertools
 from typing import List
 from os import path
 
@@ -13,15 +14,14 @@ def change_frequency(l: List[int]) -> int:
 
 
 def frequency_reached_twice(l: List[int]) -> int:
-    found = list([0])
+    found = set([0])
     current_freq = 0
-    while True:
-        for change in l:
-            current_freq += change
-            if current_freq in found:
-                return current_freq
-            else:
-                found.append(current_freq)
+    for change in itertools.cycle(l):
+        current_freq += change
+        if current_freq in found:
+            return current_freq
+        else:
+            found.add(current_freq)
 
 
 class Tests(unittest.TestCase):
@@ -56,5 +56,5 @@ class Tests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main(verbosity=2, exit=False)
-    print(change_frequency(frequencies)) # 486
-    print(frequency_reached_twice(frequencies)) # 69285
+    print(change_frequency(frequencies))  # 486
+    print(frequency_reached_twice(frequencies))  # 69285
