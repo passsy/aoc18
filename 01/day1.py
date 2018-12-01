@@ -4,9 +4,9 @@ import itertools
 from typing import List
 from os import path
 
-with open(path.join(path.dirname(__file__), 'input.txt'), 'r') as input1:
+with open(path.join(path.dirname(__file__), 'input.txt'), 'r', encoding='utf-8') as input1:
     data = input1.read().strip()
-    frequencies = list(map(int, data.splitlines()))
+    frequencies: List[int] = [int(line) for line in data.splitlines()]
 
 
 def change_frequency(l: List[int]) -> int:
