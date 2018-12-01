@@ -13,7 +13,7 @@ def change_frequency(l: List[int]) -> int:
 
 
 def frequency_reached_twice(l: List[int]) -> int:
-    found = List[int]
+    found = list([0])
     current_freq = 0
     while True:
         for change in l:
@@ -21,7 +21,7 @@ def frequency_reached_twice(l: List[int]) -> int:
             if current_freq in found:
                 return current_freq
             else:
-                found.add(current_freq)
+                found.append(current_freq)
 
 
 class Tests(unittest.TestCase):
@@ -38,11 +38,23 @@ class Tests(unittest.TestCase):
     def test_p1_sample3(self):
         self.assertEqual(change_frequency([-1, -2, -3]), -6)
 
-    def test_p2_sample1(self):
+    def test_p2_sample(self):
         self.assertEqual(frequency_reached_twice([+1, -2, +3, +1]), 2)
 
+    def test_p2_sample1(self):
+        self.assertEqual(frequency_reached_twice([+1, -1]), 0)
+
+    def test_p2_sample2(self):
+        self.assertEqual(frequency_reached_twice([+3, +3, +4, -2, -4]), 10)
+
+    def test_p2_sample3(self):
+        self.assertEqual(frequency_reached_twice([-6, +3, +8, +5, -6]), 5)
+
+    def test_p2_sample4(self):
+        self.assertEqual(frequency_reached_twice([+7, +7, -2, -7, -4]), 14)
 
 
 if __name__ == '__main__':
     unittest.main(verbosity=2, exit=False)
-    print(change_frequency(frequencies))
+    print(change_frequency(frequencies)) # 486
+    print(frequency_reached_twice(frequencies)) # 69285
