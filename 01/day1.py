@@ -14,7 +14,7 @@ def change_frequency(l: List[int]) -> int:
 
 
 def frequency_reached_twice(l: List[int]) -> int:
-    found = set([0])
+    found = {0}
     current_freq = 0
     for change in itertools.cycle(l):
         current_freq += change
