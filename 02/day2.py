@@ -33,6 +33,31 @@ class Box:
         return tripple != []
 
 
+def fabric_pairs(box_ids: List[str]) -> (str, str):
+    for id1 in box_ids:
+        for id2 in box_ids:
+            if id1 == id2:
+                continue  # same id, not common
+            diff = 0
+            for i in range(len(id1)):
+                if diff > 1:
+                    break
+                if id1[i] != id2[i]:
+                    diff = diff + 1
+            if diff == 1:
+                return id1, id2
+
+
+def common_letters(pair: (str, str)) -> str:
+    result = ""
+    for i in range(len(pair[0])):
+        c1 = pair[0][i]
+        c2 = pair[1][i]
+        if c1 == c2:
+            result += c1
+    return result
+
+
 class Tests(unittest.TestCase):
     def test_box_has_no_doubles(self):
         self.assertEqual(Box("abcdef").has_doubles(), False)
@@ -49,6 +74,17 @@ class Tests(unittest.TestCase):
     def test_p1_checksum_sample(self):
         self.assertEqual(checksum(["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"]), 12)
 
+    def test_fabric_pairs(self):
+        self.assertEqual(fabric_pairs(["abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"]),
+                         ("fghij", "fguij"))
+
+    def test_common_letters(self):
+        self.assertEqual(common_letters(("fghij", "fguij")), "fgij")
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2, exit=False)
-    print(f'checksum {checksum(box_input)}')
+    print(f'checksum {checksum(box_input)}')  # 6972
+    pair = fabric_pairs(box_input)  # ('aixwcbzrmdvpsjfgllthdyeoqe', 'aixwcbzrmdvpsjfgllthdyioqe')
+    print(f'boxes with fabric: {pair}')
+    print(f'common letters: {common_letters(pair)}')  # aixwcbzrmdvpsjfgllthdyoqe
