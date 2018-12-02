@@ -49,13 +49,7 @@ def fabric_pairs(box_ids: List[str]) -> (str, str):
 
 
 def common_letters(pair: (str, str)) -> str:
-    result = ""
-    for i in range(len(pair[0])):
-        c1 = pair[0][i]
-        c2 = pair[1][i]
-        if c1 == c2:
-            result += c1
-    return result
+    return "".join(letter for letter in pair[0] if letter in pair[1])
 
 
 class Tests(unittest.TestCase):
