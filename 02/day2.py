@@ -11,9 +11,9 @@ with open(path.join(path.dirname(__file__), 'input.txt'), 'r', encoding='utf-8')
 
 def checksum(box_ids: List[str]) -> int:
     boxes = [Box(l) for l in box_ids]
-    doubles = len([box for box in boxes if box.has_doubles()])
-    triples = len([box for box in boxes if box.has_triples()])
-    return doubles * triples
+    doubles = [box for box in boxes if box.has_doubles()]
+    triples = [box for box in boxes if box.has_triples()]
+    return len(doubles) * len(triples)
 
 
 class Box:
