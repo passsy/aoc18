@@ -29,8 +29,8 @@ class Box:
         return double != []
 
     def has_triples(self) -> bool:
-        tripple = [item for item in self.groups if 3 in item.values()]
-        return tripple != []
+        triple = [item for item in self.groups if 3 in item.values()]
+        return triple != []
 
 
 def fabric_pairs(box_ids: List[str]) -> (str, str):
